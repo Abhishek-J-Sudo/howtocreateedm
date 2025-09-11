@@ -1,6 +1,7 @@
 import React from 'react';
 import { AlertTriangle, CheckCircle, Smartphone, Monitor } from 'lucide-react';
 import GridSystemGuide from '../components/educational/GridSystemGuide';
+import DesignRestrictions from '../components/educational/DesignRestrictions';
 
 const HomePage: React.FC = () => {
   return (
@@ -110,6 +111,20 @@ const HomePage: React.FC = () => {
           </div>
 
           <GridSystemGuide />
+        </div>
+      </section>
+
+      {/* Design Restrictions Section */}
+      <section className="py-16 bg-bg-surface">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">What NOT to Design</h2>
+            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
+              Common design patterns that look amazing in mockups but can't be implemented in HTML emails.
+            </p>
+          </div>
+
+          <DesignRestrictions />
         </div>
       </section>
 

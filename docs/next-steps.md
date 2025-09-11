@@ -11,6 +11,19 @@
 - [x] Show proper table-based email structure
 - [x] Designer-focused visual education (no code)
 
+### 1.5. DesignRestrictions Component ✅ COMPLETED
+- [x] Visual examples of problematic design patterns
+- [x] 5 restriction categories with interactive examples:
+  - Overlapping elements & z-index layers
+  - Diagonal text & image layouts  
+  - Complex button designs & interactive CTAs
+  - Text overlaid on images
+  - Advanced visual effects & animations
+- [x] Toggle-able restriction overlay system
+- [x] Detailed technical explanations for each restriction
+- [x] Email-safe alternative solutions section
+- [x] Integrated into homepage as "What NOT to Design" section
+
 ### 2. ComparisonCard Component (moved to /dev folder for future developer section)
 - [x] Build side-by-side comparison layout
 - [x] Add code examples for good/bad practices
@@ -144,9 +157,10 @@
 
 **High Priority (Start Next):**
 1. ~~GridSystemGuide Component~~ ✅ COMPLETED
-2. ClientCompatibilityMatrix Component
-3. BeforeAfterSlider Component
-4. Visual assets creation
+2. ~~DesignRestrictions Component~~ ✅ COMPLETED  
+3. ClientCompatibilityMatrix Component
+4. BeforeAfterSlider Component
+5. Visual assets creation
 
 **Medium Priority:**
 1. TypographyGuide
