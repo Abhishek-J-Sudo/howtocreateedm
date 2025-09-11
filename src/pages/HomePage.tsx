@@ -1,5 +1,6 @@
 import React from 'react';
 import { AlertTriangle, CheckCircle, Smartphone, Monitor } from 'lucide-react';
+import GridSystemGuide from '../components/educational/GridSystemGuide';
 
 const HomePage: React.FC = () => {
   return (
@@ -98,15 +99,29 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Grid Guide Section */}
+      <section className="py-16 bg-bg-primary">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">Design with Email-Safe Grids</h2>
+            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
+              Learn to structure your designs using table-based layouts that work across all email clients.
+            </p>
+          </div>
+
+          <GridSystemGuide />
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-text-primary mb-4">Ready to Learn?</h2>
+          <h2 className="text-3xl font-bold text-text-primary mb-4">Ready to Learn More?</h2>
           <p className="text-lg text-text-secondary mb-8">
-            Explore interactive examples showing what works and what doesn't in email design.
+            Explore more interactive examples covering images, mobile design, and client compatibility.
           </p>
           <button className="bg-[var(--caribbean-current)] hover:brightness-90 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
-            Start Exploring Examples
+            View All Examples
           </button>
         </div>
       </section>
