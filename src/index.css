@@ -1,1 +1,241 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+/* =========================
+   Brand Palette (exact)
+   ========================= */
+@theme {
+  /* Base brand colors */
+  --dark-slate-gray: #283d3b; /* base dark */
+  --caribbean-current: #197278; /* primary accent (teal) */
+  --snow: #fffaf7; /* paper-light background */
+  --salmon: #e4776b; /* warm accent / highlight */
+  --caput-mortuum: #642b23; /* deep earthy contrast */
+
+  /* -------- Light Theme (default) -------- */
+  /* Backgrounds */
+  --color-bg-primary: var(--snow); /* page */
+  --color-bg-surface: #fdfaf7; /* cards/sections (subtle tint) */
+  --color-bg-elevated: #f5f1ee; /* app bar / elevated cards */
+  --color-bg-code: #f7f4f1; /* code blocks */
+
+  /* Text */
+  --color-text-primary: var(--dark-slate-gray);
+  --color-text-secondary: var(--caput-mortuum);
+  --color-text-accent: var(--caribbean-current);
+  --color-text-inverse: #ffffff;
+
+  /* Buttons */
+  --color-btn-primary: var(--caribbean-current);
+  --color-btn-secondary: var(--caput-mortuum);
+  --color-btn-danger: var(--salmon);
+
+  /* Status */
+  --color-status-good: #10b981;
+  --color-status-bad: var(--salmon);
+  --color-status-warning: #f59e0b;
+  --color-status-info: #3b82f6;
+
+  /* Borders */
+  --color-border-default: #e8dfda;
+  --color-border-subtle: #efe7e2;
+  --color-border-focus: var(--caribbean-current);
+
+  /* Header/Footer */
+  --color-header-footer: var(--color-bg-primary); /* dark, branded bar */
+  --color-header-footer-text: var(--color-text-primary);
+}
+
+/* -------- Dark Theme -------- */
+[data-theme='dark'] {
+  /* Backgrounds */
+  --color-bg-primary: #182422; /* deep slate-teal base */
+  --color-bg-surface: #1f2d2b; /* darker surface */
+  --color-bg-elevated: #243735; /* elevated / app bar */
+  --color-bg-code: #1b2b29;
+
+  /* Text */
+  --color-text-primary: #f6f6f5; /* near-white for legibility */
+  --color-text-secondary: #e7d5cc; /* warm paper tint */
+  --color-text-accent: #6ec4c9; /* brighter teal for dark */
+  --color-text-inverse: #0e1514;
+
+  /* Buttons */
+  --color-btn-primary: #2b8a8f; /* tempered teal pop */
+  --color-btn-secondary: #8a4b42; /* warm earthy */
+  --color-btn-danger: #ef6a5e;
+
+  /* Status */
+  --color-status-good: #34d399;
+  --color-status-bad: #ef4444;
+  --color-status-warning: #fbbf24;
+  --color-status-info: #60a5fa;
+
+  /* Borders */
+  --color-border-default: #2a3b39;
+  --color-border-subtle: #21302e;
+  --color-border-focus: #6ec4c9;
+
+  /* Header/Footer (slightly deeper than elevated) */
+  --color-header-footer: #1b2b29; /* deep slate teal */
+  --color-header-footer-text: #fffaf7; /* snow */
+}
+
+/* =========================
+   App defaults & helpers
+   ========================= */
+
+:root {
+  color-scheme: light dark;
+}
+
+html,
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Smooth theme transitions */
+*,
+*::before,
+*::after {
+  transition: color 150ms linear, background-color 150ms linear, border-color 150ms linear,
+    fill 150ms linear, stroke 150ms linear;
+}
+
+/* Semantic utility mappings (so your Tailwind classes work) */
+.bg-bg-primary {
+  background-color: var(--color-bg-primary);
+}
+.bg-bg-surface {
+  background-color: var(--color-bg-surface);
+}
+.bg-bg-elevated {
+  background-color: var(--color-bg-elevated);
+}
+.bg-bg-code {
+  background-color: var(--color-bg-code);
+}
+
+.bg-radial-brand {
+  background: radial-gradient(
+    circle at center,
+    var(--salmon) 0%,
+    var(--salmon) 0%,
+    var(--caribbean-current) 0%,
+    var(--snow) 200%
+  );
+}
+
+.text-text-primary {
+  color: var(--color-text-primary);
+}
+.text-text-secondary {
+  color: var(--color-text-secondary);
+}
+.text-text-accent {
+  color: var(--color-text-accent);
+}
+.text-text-inverse {
+  color: var(--color-text-inverse);
+}
+
+.border-border-default {
+  border-color: var(--color-border-default);
+}
+.border-border-subtle {
+  border-color: var(--color-border-subtle);
+}
+
+/* Accessible focus */
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+/* =========================
+   Header / Footer
+   ========================= */
+
+/* Drop this class onto your header/footer wrappers */
+.app-header,
+.app-footer {
+  background-color: var(--color-header-footer);
+  color: var(--color-header-footer-text);
+  border-color: var(--color-border-default);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+/* If you prefer keeping your current header tag but want automatic theming,
+   you can also use these element selectors (optional; remove if not needed) */
+header.app-header a,
+footer.app-footer a {
+  color: var(--color-header-footer-text);
+}
+header.app-header a:hover,
+footer.app-footer a:hover {
+  color: var(--salmon);
+}
+
+/* =========================
+   Components (optional)
+   ========================= */
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-medium shadow-sm;
+}
+.btn-primary {
+  background-color: var(--color-btn-primary);
+  color: var(--color-text-inverse);
+}
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-secondary {
+  background-color: var(--color-btn-secondary);
+  color: var(--color-text-inverse);
+}
+.btn-secondary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-danger {
+  background-color: var(--color-btn-danger);
+  color: var(--color-text-inverse);
+}
+.btn-danger:hover {
+  filter: brightness(0.95);
+}
+
+/* Cards / surfaces */
+.card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-default);
+  border-radius: 0.75rem; /* rounded-xl */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Code blocks */
+pre,
+code,
+kbd,
+samp {
+  background-color: var(--color-bg-code);
+  color: var(--color-text-primary);
+}
+
+/* Links */
+a {
+  color: var(--color-text-accent);
+  text-underline-offset: 3px;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Subtle separator */
+.hr-subtle {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-border-subtle), transparent);
+}

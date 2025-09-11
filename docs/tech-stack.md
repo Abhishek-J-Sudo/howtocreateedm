@@ -14,6 +14,13 @@
 - Easy to create side-by-side comparisons
 - Responsive design utilities
 
+**CSS Strategy**
+- Use **global CSS only** for custom colors and dark mode mappings
+- Components use semantic Tailwind classes (e.g., `text-primary`)
+- Avoid `dark:` prefixes at component level
+- Global CSS maps semantic classes to actual colors for both light/dark modes
+- This allows global color scheme changes without touching components
+
 ### Core Features
 - **Visual Comparisons**: Image-based before/after demonstrations
 - **Static Content**: No need for dynamic functionality
