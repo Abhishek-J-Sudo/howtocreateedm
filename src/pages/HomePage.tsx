@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Grid Guide Section */}
-      <section className="py-16 bg-bg-primary">
+      <section id="grid-systems" className="py-16 bg-bg-primary">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-text-primary mb-4">
@@ -126,7 +126,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Design Restrictions Section */}
-      <section className="py-1 pt-0 bg-bg-surface">
+      <section id="restrictions" className="py-1 pt-0 bg-bg-surface">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-text-primary mb-4">What to avoid in Designs</h2>

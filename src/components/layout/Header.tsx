@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Mail } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,18 +34,28 @@ const Header: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex space-x-4" role="navigation" aria-label="Primary">
-            <a href="#grid-systems" className="text-sm transition-colors hover:underline">
-              Grid Systems
-            </a>
-            <a href="#typography" className="text-sm transition-colors hover:underline">
-              Typography
-            </a>
-            <a href="#images" className="text-sm transition-colors hover:underline">
-              Images
-            </a>
-            <a href="#mobile" className="text-sm transition-colors hover:underline">
-              Mobile
-            </a>
+            {location.pathname === '/' ? (
+              <>
+                <a href="#grid-systems" className="text-sm transition-colors hover:underline">
+                  Grid Systems
+                </a>
+                <a href="#restrictions" className="text-sm transition-colors hover:underline">
+                  Restrictions
+                </a>
+                <Link to="/guidelines" className="text-sm transition-colors hover:underline">
+                  Guidelines
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/" className="text-sm transition-colors hover:underline">
+                  Home
+                </Link>
+                <Link to="/guidelines" className="text-sm transition-colors hover:underline">
+                  Guidelines
+                </Link>
+              </>
+            )}
           </nav>
         </div>
       </div>

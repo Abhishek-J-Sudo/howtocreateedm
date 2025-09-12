@@ -528,7 +528,7 @@ const DesignRestrictions: React.FC = () => {
       <RestrictionExample
         title="Complex Button Designs & CTAs"
         description="Fancy buttons with gradients, custom shapes, or overlapping designs from PSD/Illustrator."
-        reason="Fancy CTAs will be converted to PNG images, losing interactivity and accessibility."
+        reason="Fancy CTAs will be extracted to PNG images as the text links will get underlined in Outlook."
         showOverlay={showOverlays}
       >
         <div className="p-6 bg-gray-50 space-y-6">
@@ -582,6 +582,11 @@ const DesignRestrictions: React.FC = () => {
                 If images are blocked (common in email), WHITE text becomes invisible. Email-safe
                 approach requires text in separate table cells. If CTAs are to be tracked and linked
                 individually, then add them separately along with copy keeping the image separate.
+              </p>
+              <p className="text-red-800 text-sm">
+                Note: Such section can be still added, but the whole section will be added as an
+                image and then devs will need to link the whole image, since link ctas over image is
+                not possible.
               </p>
             </div>
           </div>
