@@ -47,15 +47,15 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex space-x-4" role="navigation" aria-label="Primary">
             {location.pathname === '/' ? (
               <>
-                <a 
-                  href="#grid-systems" 
+                <a
+                  href="#grid-systems"
                   onClick={(e) => handleSmoothScroll(e, '#grid-systems')}
                   className="text-sm transition-colors hover:underline"
                 >
                   Grid Systems
                 </a>
-                <a 
-                  href="#restrictions" 
+                <a
+                  href="#restrictions"
                   onClick={(e) => handleSmoothScroll(e, '#restrictions')}
                   className="text-sm transition-colors hover:underline"
                 >

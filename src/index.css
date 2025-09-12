@@ -96,12 +96,12 @@ body {
 }
 
 /* Smooth theme transitions */
-*,
+/* *,
 *::before,
 *::after {
   transition: color 150ms linear, background-color 150ms linear, border-color 150ms linear,
     fill 150ms linear, stroke 150ms linear;
-}
+} */
 
 /* Semantic utility mappings (so your Tailwind classes work) */
 .bg-bg-primary {
@@ -278,6 +278,10 @@ html {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

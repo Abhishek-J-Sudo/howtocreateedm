@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Eye, Palette, Layout, Target, ArrowRight, CheckCircle } from 'lucide-react';
+import { Eye, Palette, Layout, Target, ArrowRight, CheckCircle, Info } from 'lucide-react';
 
 const DesignGuidelines: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null);
+
+  const showTooltip = (tooltipId: string) => {
+    setActiveTooltip(tooltipId);
+  };
+
+  const hideTooltip = () => {
+    setActiveTooltip(null);
+  };
 
   useEffect(() => {
     // Scroll to top when page loads
@@ -16,7 +25,43 @@ const DesignGuidelines: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const tableOfContents = [
+    { id: 'visual-hierarchy', title: 'Visual Hierarchy', icon: Eye },
+    { id: 'color-psychology', title: 'Color Psychology', icon: Palette },
+    { id: 'design-composition', title: 'Design Composition', icon: Layout },
+    { id: 'email-patterns', title: 'Email Patterns', icon: Target },
+    { id: 'accessibility', title: 'Accessibility', icon: CheckCircle },
+    { id: 'ab-testing', title: 'A/B Testing', icon: ArrowRight }
+  ];
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
+    <div className="relative">
+      {/* Sticky Table of Contents */}
+      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+        <div className="bg-white rounded-lg shadow-lg border p-4 max-w-xs">
+          <h3 className="font-semibold text-sm mb-3 text-gray-700">Quick Navigation</h3>
+          <nav className="space-y-2">
+            {tableOfContents.map(({ id, title, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className="flex items-center gap-2 w-full text-left text-sm p-2 rounded hover:bg-gray-100 transition-colors"
+              >
+                <Icon className="h-4 w-4 text-gray-500" />
+                <span className="text-gray-700">{title}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+      </div>
+
     <main className={`flex-1 ${isLoaded ? 'page-fade-in' : 'opacity-0'}`}>
       {/* Hero Section */}
       <section className="bg-radial-brand text-white py-16 pt-32">
@@ -31,7 +76,7 @@ const DesignGuidelines: React.FC = () => {
       </section>
 
       {/* Visual Hierarchy Section */}
-      <section className="py-16 bg-bg-surface">
+      <section id="visual-hierarchy" className="py-16 bg-bg-surface">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Eye className="h-12 w-12 text-blue-600 mx-auto mb-4" />
@@ -45,8 +90,25 @@ const DesignGuidelines: React.FC = () => {
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* F-Pattern */}
-            <div className="card p-6">
-              <h3 className="text-xl font-bold text-text-primary mb-4">F-Pattern Reading</h3>
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
+              <div className="flex items-center gap-2 mb-4">
+                <h3 className="text-xl font-bold text-text-primary">F-Pattern Reading</h3>
+                <div className="relative">
+                  <button
+                    onMouseEnter={() => showTooltip('f-pattern')}
+                    onMouseLeave={hideTooltip}
+                    className="p-1 hover:bg-gray-200 rounded-full"
+                  >
+                    <Info className="h-4 w-4 text-gray-500" />
+                  </button>
+                  {activeTooltip === 'f-pattern' && (
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded shadow-lg whitespace-nowrap z-10">
+                      Most effective for text-heavy emails
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className="bg-gray-100 p-6 rounded-lg mb-4 relative">
                 <div className="absolute top-2 left-2 w-32 h-3 bg-blue-500 opacity-80 rounded"></div>
                 <div className="absolute top-8 left-2 w-24 h-3 bg-blue-400 opacity-60 rounded"></div>
@@ -63,7 +125,7 @@ const DesignGuidelines: React.FC = () => {
             </div>
 
             {/* Z-Pattern */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-4">Z-Pattern Layout</h3>
               <div className="bg-gray-100 p-6 rounded-lg mb-4 relative">
                 <div className="absolute top-2 left-2 w-24 h-8 bg-green-500 opacity-80 rounded flex items-center justify-center text-white text-xs">Logo</div>
@@ -81,7 +143,7 @@ const DesignGuidelines: React.FC = () => {
           </div>
 
           {/* CTA Placement */}
-          <div className="card p-8">
+          <div className="card p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
             <h3 className="text-2xl font-bold text-text-primary mb-6">Call-to-Action Placement Strategy</h3>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
@@ -111,7 +173,7 @@ const DesignGuidelines: React.FC = () => {
       </section>
 
       {/* Color Psychology Section */}
-      <section className="py-16 bg-bg-primary">
+      <section id="color-psychology" className="py-16 bg-bg-primary">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Palette className="h-12 w-12 text-purple-600 mx-auto mb-4" />
@@ -125,7 +187,7 @@ const DesignGuidelines: React.FC = () => {
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* Color Emotions */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-6">Color Emotional Impact</h3>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -167,7 +229,7 @@ const DesignGuidelines: React.FC = () => {
             </div>
 
             {/* Brand Consistency */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-6">Brand Consistency Tips</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -203,7 +265,7 @@ const DesignGuidelines: React.FC = () => {
           </div>
 
           {/* Seasonal Approaches */}
-          <div className="card p-8">
+          <div className="card p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
             <h3 className="text-2xl font-bold text-text-primary mb-6">Seasonal Design Approaches</h3>
             <div className="grid md:grid-cols-4 gap-6">
               <div className="text-center">
@@ -240,7 +302,7 @@ const DesignGuidelines: React.FC = () => {
       </section>
 
       {/* Design Composition Section */}
-      <section className="py-16 bg-bg-surface">
+      <section id="design-composition" className="py-16 bg-bg-surface">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Layout className="h-12 w-12 text-green-600 mx-auto mb-4" />
@@ -254,7 +316,7 @@ const DesignGuidelines: React.FC = () => {
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {/* Whitespace Usage */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-4">Whitespace Mastery</h3>
               <div className="bg-gray-50 p-6 rounded-lg mb-4">
                 <div className="bg-blue-100 p-4 rounded mb-4">
@@ -276,7 +338,7 @@ const DesignGuidelines: React.FC = () => {
             </div>
 
             {/* Visual Flow */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-4">Visual Flow Direction</h3>
               <div className="bg-gray-50 p-6 rounded-lg mb-4 relative">
                 <div className="absolute top-2 left-6 right-6">
@@ -298,7 +360,7 @@ const DesignGuidelines: React.FC = () => {
           </div>
 
           {/* Image-to-Text Ratios */}
-          <div className="card p-8">
+          <div className="card p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
             <h3 className="text-2xl font-bold text-text-primary mb-6">Image-to-Text Balance</h3>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="text-center">
@@ -338,7 +400,7 @@ const DesignGuidelines: React.FC = () => {
       </section>
 
       {/* Email Design Patterns Section */}
-      <section className="py-16 bg-bg-primary">
+      <section id="email-patterns" className="py-16 bg-bg-primary">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Target className="h-12 w-12 text-orange-600 mx-auto mb-4" />
@@ -352,7 +414,7 @@ const DesignGuidelines: React.FC = () => {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Newsletter Pattern */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-4">Newsletter Layout</h3>
               <div className="bg-gray-50 p-4 rounded-lg mb-4">
                 <div className="bg-blue-500 text-white p-2 rounded text-center text-xs mb-2">Header/Logo</div>
@@ -371,7 +433,7 @@ const DesignGuidelines: React.FC = () => {
             </div>
 
             {/* E-commerce Pattern */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-4">E-commerce Layout</h3>
               <div className="bg-gray-50 p-4 rounded-lg mb-4">
                 <div className="bg-red-500 text-white p-2 rounded text-center text-xs mb-2">Sale Banner</div>
@@ -390,7 +452,7 @@ const DesignGuidelines: React.FC = () => {
             </div>
 
             {/* Welcome Series Pattern */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-4">Welcome Email</h3>
               <div className="bg-gray-50 p-4 rounded-lg mb-4">
                 <div className="bg-green-500 text-white p-2 rounded text-center text-xs mb-2">Welcome Message</div>
@@ -406,7 +468,7 @@ const DesignGuidelines: React.FC = () => {
             </div>
 
             {/* Promotional Pattern */}
-            <div className="card p-6">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
               <h3 className="text-xl font-bold text-text-primary mb-4">Promotional Email</h3>
               <div className="bg-gray-50 p-4 rounded-lg mb-4">
                 <div className="bg-red-600 text-white p-2 rounded text-center text-xs mb-2">Limited Time Offer</div>
@@ -419,6 +481,209 @@ const DesignGuidelines: React.FC = () => {
                 <li>• Focus on customer benefits</li>
                 <li>• Make CTA impossible to miss</li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Accessibility Guidelines Section */}
+      <section id="accessibility" className="py-16 bg-bg-surface">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <CheckCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
+              Email Accessibility Guidelines
+            </h2>
+            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
+              Ensure your emails are accessible to all users, including those using assistive technologies.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
+              <h3 className="text-xl font-bold text-text-primary mb-4">Text & Color Contrast</h3>
+              <ul className="space-y-3 text-text-secondary">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Maintain 4.5:1 contrast ratio for normal text</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Use 3:1 contrast ratio for large text (18pt+)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Don't rely solely on color to convey information</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Test with high contrast mode enabled</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
+              <h3 className="text-xl font-bold text-text-primary mb-4">Structure & Navigation</h3>
+              <ul className="space-y-3 text-text-secondary">
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Use semantic HTML headers (h1, h2, h3)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Include alt text for all images</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Use descriptive link text (avoid "click here")</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                  <span>Provide skip links for lengthy content</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="card p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
+            <h3 className="text-2xl font-bold text-text-primary mb-6">Screen Reader Optimization</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Eye className="h-8 w-8 text-blue-600" />
+                </div>
+                <h4 className="font-semibold mb-2">Reading Order</h4>
+                <p className="text-sm text-text-secondary">Ensure logical tab and reading sequence</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Layout className="h-8 w-8 text-green-600" />
+                </div>
+                <h4 className="font-semibold mb-2">Table Headers</h4>
+                <p className="text-sm text-text-secondary">Use proper table markup with headers</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Target className="h-8 w-8 text-purple-600" />
+                </div>
+                <h4 className="font-semibold mb-2">Focus States</h4>
+                <p className="text-sm text-text-secondary">Provide clear keyboard focus indicators</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* A/B Testing Section */}
+      <section id="ab-testing" className="py-16 bg-bg-primary">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <ArrowRight className="h-12 w-12 text-orange-600 mx-auto mb-4" />
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
+              A/B Testing Best Practices
+            </h2>
+            <p className="text-lg text-text-secondary max-w-3xl mx-auto">
+              Optimize your email designs through systematic testing and data-driven improvements.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
+              <h3 className="text-xl font-bold text-text-primary mb-4">What to Test</h3>
+              <div className="space-y-4">
+                <div className="border-l-4 border-blue-500 pl-4">
+                  <h4 className="font-semibold text-text-primary">Subject Lines</h4>
+                  <p className="text-sm text-text-secondary">Length, personalization, urgency, emojis</p>
+                </div>
+                <div className="border-l-4 border-green-500 pl-4">
+                  <h4 className="font-semibold text-text-primary">Call-to-Action</h4>
+                  <p className="text-sm text-text-secondary">Button color, text, placement, size</p>
+                </div>
+                <div className="border-l-4 border-purple-500 pl-4">
+                  <h4 className="font-semibold text-text-primary">Layout & Design</h4>
+                  <p className="text-sm text-text-secondary">Image placement, color schemes, layouts</p>
+                </div>
+                <div className="border-l-4 border-orange-500 pl-4">
+                  <h4 className="font-semibold text-text-primary">Content</h4>
+                  <p className="text-sm text-text-secondary">Headlines, copy length, social proof</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="card p-6 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
+              <h3 className="text-xl font-bold text-text-primary mb-4">Testing Framework</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-blue-600 font-bold text-sm">1</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Hypothesis</h4>
+                    <p className="text-sm text-text-secondary">Define what you're testing and expected outcome</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-green-600 font-bold text-sm">2</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Sample Size</h4>
+                    <p className="text-sm text-text-secondary">Ensure statistical significance with adequate volume</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-purple-600 font-bold text-sm">3</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Duration</h4>
+                    <p className="text-sm text-text-secondary">Run tests long enough to account for timing variations</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-orange-600 font-bold text-sm">4</span>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold">Analysis</h4>
+                    <p className="text-sm text-text-secondary">Measure beyond opens - focus on conversions</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="card p-8 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out">
+            <h3 className="text-2xl font-bold text-text-primary mb-6">Key Metrics to Track</h3>
+            <div className="grid md:grid-cols-4 gap-6">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-lg">%</span>
+                </div>
+                <h4 className="font-semibold mb-2">Open Rate</h4>
+                <p className="text-sm text-text-secondary">Subject line effectiveness</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-lg">→</span>
+                </div>
+                <h4 className="font-semibold mb-2">Click Rate</h4>
+                <p className="text-sm text-text-secondary">Content and CTA performance</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-lg">$</span>
+                </div>
+                <h4 className="font-semibold mb-2">Conversion</h4>
+                <p className="text-sm text-text-secondary">Revenue per email sent</p>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <span className="text-white font-bold text-lg">⏱</span>
+                </div>
+                <h4 className="font-semibold mb-2">Engagement</h4>
+                <p className="text-sm text-text-secondary">Time spent reading</p>
+              </div>
             </div>
           </div>
         </div>
@@ -442,6 +707,7 @@ const DesignGuidelines: React.FC = () => {
         </div>
       </section>
     </main>
+    </div>
   );
 };
 

@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { AlertTriangle, CheckCircle, Smartphone, Monitor } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Smartphone, Monitor, Grid, Shield, Target } from 'lucide-react';
 import GridSystemGuide from '../components/educational/GridSystemGuide';
 import DesignRestrictions from '../components/educational/DesignRestrictions';
 
 const HomePage: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const tableOfContents = [
+    { id: 'problem-section', title: 'The Problem', icon: AlertTriangle },
+    { id: 'grid-systems', title: 'Grid Systems', icon: Grid },
+    { id: 'restrictions', title: 'Design Restrictions', icon: Shield },
+    { id: 'cta-section', title: 'Next Steps', icon: Target }
+  ];
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     // Scroll to top when page loads
@@ -19,6 +33,26 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
+    <div className="relative">
+      {/* Sticky Table of Contents */}
+      <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+        <div className="bg-white rounded-lg shadow-lg border p-4 max-w-xs">
+          <h3 className="font-semibold text-sm mb-3 text-gray-700">Quick Navigation</h3>
+          <nav className="space-y-2">
+            {tableOfContents.map(({ id, title, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className="flex items-center gap-2 w-full text-left text-sm p-2 rounded hover:bg-gray-100 transition-colors"
+              >
+                <Icon className="h-4 w-4 text-gray-500" />
+                <span className="text-gray-700">{title}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+      </div>
+
     <main className={`flex-1 ${isLoaded ? 'page-fade-in' : 'opacity-0'}`}>
       {/* Hero Section */}
       <section className="bg-radial-brand text-white py-16 pt-50">
@@ -48,7 +82,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Problem Section */}
-      <section className="py-16 bg-bg-surface">
+      <section id="problem-section" className="py-16 bg-bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-text-primary mb-4">
@@ -155,7 +189,7 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
+      <section id="cta-section" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-text-primary mb-4">Ready to Learn More?</h2>
           <p className="text-lg text-text-secondary mb-8">
@@ -168,6 +202,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
     </main>
+    </div>
   );
 };
 
