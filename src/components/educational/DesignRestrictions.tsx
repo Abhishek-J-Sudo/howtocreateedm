@@ -40,7 +40,9 @@ const RestrictionExample: React.FC<RestrictionExampleProps> = ({
 
 const DesignRestrictions: React.FC = () => {
   const [showOverlays, setShowOverlays] = useState(false);
-  const [overlappingSliderPosition, setOverlappingSliderPosition] = useState(50);
+  const [overlappingSliderPosition, setOverlappingSliderPosition] = useState(100);
+  const [diagonalSliderPosition, setDiagonalSliderPosition] = useState(100);
+  const [textOverImageSliderPosition, setTextOverImageSliderPosition] = useState(100);
 
   return (
     <div className="card p-8 mb-8">
@@ -348,7 +350,6 @@ const DesignRestrictions: React.FC = () => {
                 ✅ Email-Safe (After)
               </div>
             )}
-          
           </div>
         </div>
 
@@ -358,53 +359,170 @@ const DesignRestrictions: React.FC = () => {
         </div>
       </div>
 
-      {/* Diagonal Layouts */}
-      <RestrictionExample
-        title="Diagonal Text & Image Layouts"
-        description="Text following diagonal lines or images positioned at angles across content sections."
-        reason="HTML tables only support rectangular grid layouts. Diagonal arrangements require CSS positioning that breaks in email clients."
-        showOverlay={showOverlays}
-      >
-        <div className="relative h-64 bg-gradient-to-br from-amber-50 to-orange-100 overflow-hidden">
-          {/* Two-column grid overlay to show proper email table structure */}
-          {showOverlays && (
-            <div
-              className="absolute inset-2 grid gap-1 pointer-events-none z-20"
-              style={{ gridTemplateColumns: '60% 40%' }}
-            >
-              <div className="border-2 border-dashed border-red-400 bg-red-50/30 rounded flex items-center justify-center text-red-600 font-mono text-xs">
-                Left Column
-              </div>
-              <div className="border-2 border-dashed border-red-400 bg-red-50/30 rounded flex items-center justify-center text-red-600 font-mono text-xs">
-                Right Column
-              </div>
-            </div>
-          )}
-
-          {/* Diagonal food image on left - skewed like in the reference */}
-          <div className="absolute left-0 top-0 w-2/3 h-full transform skew-x-12 origin-bottom-left overflow-hidden">
-            <img
-              src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=400&fit=crop&crop=center"
-              alt="Restaurant food"
-              className="w-full h-full object-cover transform -skew-x-12 scale-125"
-            />
+      {/* Diagonal Layouts with Before/After Slider */}
+      <div className="mb-12">
+        <div className="mb-4">
+          <div className="flex items-center mb-2">
+            <X className="h-5 w-5 text-red-600 mr-2" />
+            <h4 className="font-semibold text-lg text-text-primary">
+              Diagonal Text & Image Layouts
+            </h4>
           </div>
-
-          {/* Text content on right */}
-          <div className="absolute right-8 top-1/2 transform -translate-y-1/2 text-right z-10">
-            <h3 className="text-2xl font-bold text-amber-900 mb-3">Navigators Club</h3>
-            <h4 className="text-lg font-semibold text-amber-800 mb-4">FINE DINING EXPERIENCE</h4>
-            <p className="text-amber-700 text-sm leading-relaxed mb-6 max-w-xs">
-              Dine in style at Navigators' Club
-              <br />
-              with buffet or à la carte favorites.
-            </p>
-            <button className="bg-amber-700 text-white px-6 py-2 rounded-full font-semibold hover:bg-amber-800 transition-colors">
-              Reserve Now
-            </button>
+          <p className="text-text-secondary text-sm mb-2">
+            Text following diagonal lines or images positioned at angles across content sections.
+          </p>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <div className="flex items-start">
+              <AlertTriangle className="h-4 w-4 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+              <p className="text-red-800 text-sm">
+                HTML tables only support rectangular grid layouts. Diagonal arrangements require CSS
+                positioning that breaks in email clients.
+              </p>
+            </div>
           </div>
         </div>
-      </RestrictionExample>
+
+        <div className="relative bg-white border-2 border-red-300 rounded-lg overflow-hidden mb-4">
+          <div className="relative h-64 overflow-hidden">
+            {/* Before (Problematic Design) */}
+            <div
+              className="absolute inset-0 bg-white"
+              style={{
+                clipPath: `polygon(0% 0%, ${diagonalSliderPosition}% 0%, ${diagonalSliderPosition}% 100%, 0% 100%)`,
+              }}
+            >
+              <div className="relative h-full bg-gradient-to-br from-amber-50 to-orange-100 overflow-hidden">
+                {/* Two-column grid overlay to show proper email table structure */}
+                {showOverlays && (
+                  <div
+                    className="absolute inset-2 grid gap-1 pointer-events-none z-20"
+                    style={{ gridTemplateColumns: '60% 40%' }}
+                  >
+                    <div className="border-2 border-dashed border-red-400 bg-red-50/30 rounded flex items-center justify-center text-red-600 font-mono text-xs">
+                      Left Column
+                    </div>
+                    <div className="border-2 border-dashed border-red-400 bg-red-50/30 rounded flex items-center justify-center text-red-600 font-mono text-xs">
+                      Right Column
+                    </div>
+                  </div>
+                )}
+
+                {/* Diagonal food image on left - skewed like in the reference */}
+                <div className="absolute left-0 top-0 w-2/3 h-full transform skew-x-22 origin-bottom-left overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&h=400&fit=crop&crop=center"
+                    alt="Restaurant food"
+                    className="w-full h-full object-cover transform -skew-x-12 scale-125"
+                  />
+                </div>
+
+                {/* Text content on right */}
+                <div className="absolute right-40 top-1/2 transform -translate-y-1/2 text-right z-10">
+                  <h3 className="text-2xl font-bold text-amber-900 mb-3">Navigators Club</h3>
+                  <h4 className="text-lg font-semibold text-amber-800 mb-4">
+                    FINE DINING EXPERIENCE
+                  </h4>
+                  <p className="text-amber-700 text-sm leading-relaxed mb-6 max-w-xs">
+                    Dine in style at Navigators' Club
+                    <br />
+                    with buffet or à la carte favorites.
+                  </p>
+                  <button className="bg-amber-700 text-white px-6 py-2 rounded-full font-semibold hover:bg-amber-800 transition-colors">
+                    Reserve Now
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* After (Email-Safe Design) */}
+            <div
+              className="absolute inset-0 bg-white"
+              style={{
+                clipPath: `polygon(${diagonalSliderPosition}% 0%, 100% 0%, 100% 100%, ${diagonalSliderPosition}% 100%)`,
+              }}
+            >
+              <div className="relative h-full bg-gradient-to-br from-amber-50 to-orange-100">
+                {/* Grid overlay for email-safe structure */}
+                {showOverlays && (
+                  <div className="absolute inset-2 grid grid-cols-2 gap-1 pointer-events-none z-20">
+                    <div className="border-2 border-dashed border-green-400 bg-green-50/30 rounded flex items-center justify-center text-green-600 font-mono text-xs">
+                      Image Column
+                    </div>
+                    <div className="border-2 border-dashed border-green-400 bg-green-50/30 rounded flex items-center justify-center text-green-600 font-mono text-xs">
+                      Content Column
+                    </div>
+                  </div>
+                )}
+
+                {/* Email-safe 2-column layout */}
+                <div className="grid grid-cols-2 h-full">
+                  {/* Left column - Image */}
+                  <div className="flex items-center justify-center p-0 overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=300&h=200&fit=crop&crop=center"
+                      alt="Restaurant food"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Right column - Content */}
+                  <div className="flex flex-col justify-center p-6 text-left">
+                    <h3 className="text-xl font-bold text-amber-900 mb-2">Navigators Club</h3>
+                    <h4 className="text-md font-semibold text-amber-800 mb-3">
+                      FINE DINING EXPERIENCE
+                    </h4>
+                    <p className="text-amber-700 text-sm leading-relaxed mb-4">
+                      Dine in style at Navigators' Club with buffet or à la carte favorites.
+                    </p>
+                    <button className="bg-amber-700 text-white px-4 py-2 rounded font-semibold hover:bg-amber-800 transition-colors w-fit">
+                      Reserve Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Slider Control */}
+            <div className="absolute inset-x-0 top-1/2 transform -translate-y-1/2">
+              <div
+                className="absolute w-1 bg-gray-400 h-full cursor-col-resize"
+                style={{ left: `${diagonalSliderPosition}%` }}
+              >
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-btn-primary border-2 border-gray-400 rounded-full flex items-center justify-center shadow-lg">
+                  <ChevronLeft className="w-6 h-6 text-white" />
+                  <ChevronRight className="w-6 h-6 text-white -ml-1" />
+                </div>
+              </div>
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={diagonalSliderPosition}
+                onChange={(e) => setDiagonalSliderPosition(Number(e.target.value))}
+                className="absolute w-full h-full opacity-0 cursor-col-resize"
+              />
+            </div>
+
+            {/* Labels */}
+            {diagonalSliderPosition > 0 && (
+              <div className="absolute bottom-4 left-4 bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">
+                ❌ Problematic (Before)
+              </div>
+            )}
+            {diagonalSliderPosition < 100 && (
+              <div className="absolute bottom-4 right-4 bg-green-600 text-white px-3 py-1 rounded text-xs font-bold">
+                ✅ Email-Safe (After)
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Slider instruction */}
+        <div className="text-center text-sm text-gray-600 mb-4">
+          Drag the slider to compare the diagonal design with the email-safe grid version
+        </div>
+      </div>
 
       {/* Complex Buttons and CTAs */}
       <RestrictionExample
@@ -443,30 +561,157 @@ const DesignRestrictions: React.FC = () => {
         </div>
       </RestrictionExample>
 
-      {/* Text Over Images */}
-      <RestrictionExample
-        title="Text & CTA Overlaid on Images"
-        description="Avoid white text positioned directly over images without proper fallbacks. CTAs over images cant be linked individually, developers will need to extract full image and link it as a whole."
-        reason="If images are blocked (common in email), WHITE text becomes invisible. Email-safe approach requires text in separate table cells. If CTAs are to be tracked and linked individually, then add them separately along with copy keeping the image separate."
-        showOverlay={showOverlays}
-      >
-        <div className="relative h-64">
-          <img
-            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop&crop=center"
-            alt="Store interior"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="text-center text-white">
-              <h3 className="text-4xl font-bold mb-4">GRAND OPENING</h3>
-              <p className="text-xl mb-6">Visit Our New Store Location</p>
-              <button className="bg-white text-black px-8 py-3 font-bold rounded-lg">
-                Get Directions
-              </button>
+      {/* Text & CTA Overlaid on Images with Before/After Slider */}
+      <div className="mb-12">
+        <div className="mb-4">
+          <div className="flex items-center mb-2">
+            <X className="h-5 w-5 text-red-600 mr-2" />
+            <h4 className="font-semibold text-lg text-text-primary">
+              Text & CTA Overlaid on Images
+            </h4>
+          </div>
+          <p className="text-text-secondary text-sm mb-2">
+            Avoid white text positioned directly over images without proper fallbacks. CTAs over
+            images cant be linked individually, developers will need to extract full image and link
+            it as a whole.
+          </p>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <div className="flex items-start">
+              <AlertTriangle className="h-4 w-4 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+              <p className="text-red-800 text-sm">
+                If images are blocked (common in email), WHITE text becomes invisible. Email-safe
+                approach requires text in separate table cells. If CTAs are to be tracked and linked
+                individually, then add them separately along with copy keeping the image separate.
+              </p>
             </div>
           </div>
         </div>
-      </RestrictionExample>
+
+        <div className="relative bg-white border-2 border-red-300 rounded-lg overflow-hidden mb-4">
+          <div className="relative h-80 overflow-hidden">
+            {/* Before (Problematic Design) */}
+            <div
+              className="absolute inset-0 bg-white"
+              style={{
+                clipPath: `polygon(0% 0%, ${textOverImageSliderPosition}% 0%, ${textOverImageSliderPosition}% 100%, 0% 100%)`,
+              }}
+            >
+              <div className="relative h-full">
+                {/* Grid overlay for problematic structure */}
+                {showOverlays && (
+                  <div className="absolute inset-2 pointer-events-none z-20">
+                    <div className="border-2 border-dashed border-red-400 bg-red-50/30 rounded h-full flex items-center justify-center text-red-600 font-mono text-xs">
+                      Single Cell with Overlaid Text
+                    </div>
+                  </div>
+                )}
+
+                <div className="relative h-full">
+                  <img
+                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop&crop=center"
+                    alt="Store interior"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <div className="text-center text-white">
+                      <h3 className="text-4xl font-bold mb-4">GRAND OPENING</h3>
+                      <p className="text-xl mb-6">Visit Our New Store Location</p>
+                      <button className="bg-white text-black px-8 py-3 font-bold rounded-lg">
+                        Get Directions
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* After (Email-Safe Design) */}
+            <div
+              className="absolute inset-0 bg-white"
+              style={{
+                clipPath: `polygon(${textOverImageSliderPosition}% 0%, 100% 0%, 100% 100%, ${textOverImageSliderPosition}% 100%)`,
+              }}
+            >
+              <div className="relative h-full bg-white">
+                {/* Grid overlay for email-safe structure */}
+                {showOverlays && (
+                  <div className="absolute inset-2 grid grid-rows-3 gap-1 pointer-events-none z-20">
+                    <div className="border-2 border-dashed border-green-400 bg-green-50/30 rounded flex items-center justify-center text-green-600 font-mono text-xs row-span-2">
+                      Image Row (Full Width)
+                    </div>
+                    <div className="border-2 border-dashed border-green-400 bg-green-50/30 rounded flex items-center justify-center text-green-600 font-mono text-xs">
+                      Text Row
+                    </div>
+                    <div className="border-2 border-dashed border-green-400 bg-green-50/30 rounded flex items-center justify-center text-green-600 font-mono text-xs">
+                      CTA Row
+                    </div>
+                  </div>
+                )}
+
+                {/* Email-safe 3-row layout */}
+                <div className="grid h-full">
+                  {/* Row 1: Full-width image */}
+                  <div className="bg-gray-100 flex h-40 items-center justify-center overflow-hidden">
+                    <img
+                      src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=400&fit=crop&crop=center"
+                      alt="Store interior"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Row 2: Headlines and subtext and cta */}
+                  <div className="bg-white p-6 flex flex-col justify-center text-center">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-0">GRAND OPENING</h3>
+                    <p className="text-lg text-gray-700 mb-2">Visit Our New Store Location</p>
+                    <button className="bg-blue-600 text-white px-8 py-2 font-bold rounded-lg hover:bg-blue-700 transition-colors w-1/4 mx-auto">
+                      Get Directions
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Slider Control */}
+            <div className="absolute inset-x-0 top-1/2 transform -translate-y-1/2">
+              <div
+                className="absolute w-1 bg-gray-400 h-full cursor-col-resize"
+                style={{ left: `${textOverImageSliderPosition}%` }}
+              >
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-btn-primary border-2 border-gray-400 rounded-full flex items-center justify-center shadow-lg">
+                  <ChevronLeft className="w-6 h-6 text-white" />
+                  <ChevronRight className="w-6 h-6 text-white -ml-1" />
+                </div>
+              </div>
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={textOverImageSliderPosition}
+                onChange={(e) => setTextOverImageSliderPosition(Number(e.target.value))}
+                className="absolute w-full h-full opacity-0 cursor-col-resize"
+              />
+            </div>
+
+            {/* Labels */}
+            {textOverImageSliderPosition > 0 && (
+              <div className="absolute bottom-4 left-4 bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">
+                ❌ Problematic (Before)
+              </div>
+            )}
+            {textOverImageSliderPosition < 100 && (
+              <div className="absolute bottom-4 right-4 bg-green-600 text-white px-3 py-1 rounded text-xs font-bold">
+                ✅ Email-Safe (After)
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Slider instruction */}
+        <div className="text-center text-sm text-gray-600 mb-4">
+          Drag the slider to compare overlaid text with the separated email-safe structure
+        </div>
+      </div>
 
       {/* Alternative Solutions */}
       <div className="bg-green-50 border border-green-200 rounded-lg p-6 mt-8">
