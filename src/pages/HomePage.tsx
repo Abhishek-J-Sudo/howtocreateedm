@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AlertTriangle, CheckCircle, Smartphone, Monitor } from 'lucide-react';
 import GridSystemGuide from '../components/educational/GridSystemGuide';
 import DesignRestrictions from '../components/educational/DesignRestrictions';
 
 const HomePage: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo(0, 0);
+    
+    // Trigger fade-in animation after component mounts
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main className="flex-1">
+    <main className={`flex-1 ${isLoaded ? 'page-fade-in' : 'opacity-0'}`}>
       {/* Hero Section */}
       <section className="bg-radial-brand text-white py-16 pt-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

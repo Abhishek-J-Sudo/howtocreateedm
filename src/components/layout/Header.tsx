@@ -15,6 +15,17 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const targetElement = document.getElementById(targetId.replace('#', ''));
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
   return (
     <header
       className={`fixed z-50 w-full max-w-6xl backdrop-blur-md border border-border-focus shadow-lg transition-all duration-300 ${
@@ -36,10 +47,18 @@ const Header: React.FC = () => {
           <nav className="hidden md:flex space-x-4" role="navigation" aria-label="Primary">
             {location.pathname === '/' ? (
               <>
-                <a href="#grid-systems" className="text-sm transition-colors hover:underline">
+                <a 
+                  href="#grid-systems" 
+                  onClick={(e) => handleSmoothScroll(e, '#grid-systems')}
+                  className="text-sm transition-colors hover:underline"
+                >
                   Grid Systems
                 </a>
-                <a href="#restrictions" className="text-sm transition-colors hover:underline">
+                <a 
+                  href="#restrictions" 
+                  onClick={(e) => handleSmoothScroll(e, '#restrictions')}
+                  className="text-sm transition-colors hover:underline"
+                >
                   Restrictions
                 </a>
                 <Link to="/guidelines" className="text-sm transition-colors hover:underline">
