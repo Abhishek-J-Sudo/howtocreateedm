@@ -98,9 +98,9 @@ const GridSystemGuide: React.FC = () => {
 
         {/* Newsletter Header */}
         <div className="mb-4">
-          <div className="relative bg-white border-2 border-border-default rounded-t-lg p-4 overflow-hidden">
+          <div className="relative bg-white border-2 border-border-default rounded-t-lg p-6 overflow-hidden">
             {showOverlays && (
-              <div className="absolute inset-4 grid grid-cols-2 gap-2 pointer-events-none z-10">
+              <div className="absolute inset-6 grid grid-cols-2 gap-2 pointer-events-none z-10">
                 <div className="border-2 border-dashed border-blue-400 bg-blue-50/30 rounded flex items-center justify-center text-blue-600 font-mono text-xs">
                   Header L
                 </div>
@@ -147,7 +147,7 @@ const GridSystemGuide: React.FC = () => {
             )}
             <div className="p-6">
               {/* Hero Image Row */}
-              <div className="mb-6">
+              <div className="mb-4">
                 <img
                   src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=300&fit=crop&crop=center"
                   alt="Technology workspace with code on screens"
@@ -157,8 +157,8 @@ const GridSystemGuide: React.FC = () => {
 
               {/* Hero Content Row */}
               <div className="text-center">
-                <h2 className="text-3xl font-bold mb-3 text-gray-800">This Week in Tech</h2>
-                <p className="text-text-secondary text-lg mb-4 max-w-2xl mx-auto">
+                <h2 className="text-3xl font-bold mb-0 text-gray-800">This Week in Tech</h2>
+                <p className="text-text-secondary text-lg mb-4 max-w-lg mx-auto">
                   Your weekly dose of the latest developments in web development, design, and
                   technology trends.
                 </p>
@@ -399,23 +399,23 @@ const GridSystemGuide: React.FC = () => {
           {showOverlays && (
             <div className="absolute inset-4 grid grid-cols-2 gap-2 pointer-events-none z-10">
               <div className="border-2 border-dashed border-green-400 bg-green-50/30 rounded flex items-center justify-center text-green-600 font-mono text-xs">
-                CTA
+                Support
               </div>
               <div className="border-2 border-dashed border-orange-400 bg-orange-50/30 rounded flex items-center justify-center text-orange-600 font-mono text-xs">
-                Support
+                CTA
               </div>
             </div>
           )}
           <div className="grid grid-cols-2 gap-4">
-            <div className="text-center">
-              <div className="bg-text-accent text-white font-bold px-8 py-3 rounded-lg inline-block text-lg">
-                View Full Collection →
-              </div>
-            </div>
-            <div className="text-right text-sm">
+            <div className="text-left text-sm">
               <div className="mb-1">📞 Customer Service: 1-800-STYLE-CO</div>
               <div className="mb-1">📧 support@styleco.com</div>
               <div className="text-xs text-text-secondary">Free returns within 30 days</div>
+            </div>
+            <div className="flex items-center justify-end">
+              <div className="bg-text-accent text-white font-bold px-6 py-2 rounded-lg text-lg">
+                View Full Collection →
+              </div>
             </div>
           </div>
         </div>
@@ -474,11 +474,15 @@ const GridSystemGuide: React.FC = () => {
                     Hero Visual
                   </div>
                 )}
-                <div className="w-full h-48 bg-gradient-to-b from-orange-100 to-red-100 rounded-lg flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-6xl mb-4">💪</div>
-                    <div className="text-2xl font-bold text-gray-700">Transform Your Body</div>
-                    <div className="text-gray-600">in 30 Days</div>
+                <div className="w-full h-48 bg-gradient-to-b from-orange-100 to-red-100 rounded-lg flex items-center justify-center relative overflow-hidden">
+                  <img
+                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop&crop=center"
+                    alt="Modern gym with equipment"
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                  />
+                  <div className="relative z-10 text-center bg-black/70 rounded-lg text-white px-4 py-2">
+                    <div className="text-2xl font-bold">Transform Your Body</div>
+                    <div className="text-sm">in 30 Days</div>
                   </div>
                 </div>
               </div>

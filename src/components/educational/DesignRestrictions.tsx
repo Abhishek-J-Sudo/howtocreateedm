@@ -528,7 +528,7 @@ const DesignRestrictions: React.FC = () => {
       <RestrictionExample
         title="Complex Button Designs & CTAs"
         description="Fancy buttons with gradients, custom shapes, or overlapping designs from PSD/Illustrator."
-        reason="Fancy CTAs will be extracted to PNG images as the text links will get underlined in Outlook."
+        reason="Fancy CTAs will be extracted as PNG images since the text links will get underlined in Outlook."
         showOverlay={showOverlays}
       >
         <div className="p-6 bg-gray-50 space-y-6">

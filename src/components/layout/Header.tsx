@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Mail } from 'lucide-react';
+import { Mail, Menu, X } from 'lucide-react';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,14 +25,19 @@ const Header: React.FC = () => {
         block: 'start',
       });
     }
+    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
     <header
-      className={`fixed z-50 w-full max-w-6xl backdrop-blur-md border border-border-focus shadow-lg transition-all duration-300 ${
+      className={`fixed z-50 backdrop-blur-md border border-border-focus shadow-lg transition-all duration-300 ${
         isScrolled
-          ? 'top-2 left-1/2 transform -translate-x-1/2 mx-0 rounded-lg bg-bg-code/80'
-          : 'top-4 left-1/2 transform -translate-x-1/2 mx-4 rounded-lg bg-bg-code'
+          ? 'top-2 left-4 right-4 bg-bg-code/80 rounded-lg md:top-2 md:left-1/2 md:right-auto md:w-full md:max-w-6xl md:transform md:-translate-x-1/2 md:mx-0'
+          : 'top-4 left-4 right-4 bg-bg-code rounded-lg md:top-4 md:left-1/2 md:right-auto md:w-full md:max-w-6xl md:transform md:-translate-x-1/2 md:mx-4'
       }`}
     >
       <div className="px-6 sm:px-8 lg:px-10">
@@ -44,6 +50,7 @@ const Header: React.FC = () => {
             </div>
           </div>
 
+          {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-4" role="navigation" aria-label="Primary">
             {location.pathname === '/' ? (
               <>
@@ -76,7 +83,70 @@ const Header: React.FC = () => {
               </>
             )}
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMobileMenu}
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5 text-text-primary" />
+            ) : (
+              <Menu className="h-5 w-5 text-text-primary" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-border-default bg-bg-code/95 backdrop-blur-md">
+            <nav className="px-6 py-4 space-y-3" role="navigation" aria-label="Mobile">
+              {location.pathname === '/' ? (
+                <>
+                  <a
+                    href="#grid-systems"
+                    onClick={(e) => handleSmoothScroll(e, '#grid-systems')}
+                    className="block text-sm py-2 transition-colors hover:text-text-accent"
+                  >
+                    Grid Systems
+                  </a>
+                  <a
+                    href="#restrictions"
+                    onClick={(e) => handleSmoothScroll(e, '#restrictions')}
+                    className="block text-sm py-2 transition-colors hover:text-text-accent"
+                  >
+                    Restrictions
+                  </a>
+                  <Link
+                    to="/guidelines"
+                    className="block text-sm py-2 transition-colors hover:text-text-accent"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Guidelines
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/"
+                    className="block text-sm py-2 transition-colors hover:text-text-accent"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    to="/guidelines"
+                    className="block text-sm py-2 transition-colors hover:text-text-accent"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Guidelines
+                  </Link>
+                </>
+              )}
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );
