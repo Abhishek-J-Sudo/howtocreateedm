@@ -17,6 +17,7 @@
   --color-bg-surface: #fdfaf7; /* cards/sections (subtle tint) */
   --color-bg-elevated: #f5f1ee; /* app bar / elevated cards */
   --color-bg-code: #f7f4f1; /* code blocks */
+  --color-bg-secondary: #e7faf7;
 
   /* Text */
   --color-text-primary: var(--dark-slate-gray);

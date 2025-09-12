@@ -7,7 +7,7 @@ const HomePage: React.FC = () => {
   return (
     <main className="flex-1">
       {/* Hero Section */}
-      <section className="bg-radial-brand text-white py-16 pt-30">
+      <section className="bg-radial-brand text-white py-16 pt-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Why 60% of Email Designs
@@ -55,19 +55,23 @@ const HomePage: React.FC = () => {
               <ul className="space-y-3 text-text-secondary">
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
-                  Modern CSS Grid layouts
+                  Rich, poster-style graphics with heavy artwork
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
-                  Custom web fonts
+                  Custom typography & decorative fonts
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
-                  Flexbox responsiveness
+                  Overlapping elements, badges, and layered effects
                 </li>
                 <li className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
-                  Advanced CSS animations
+                  Text baked into images for exact styling
+                </li>
+                <li className="flex items-center">
+                  <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
+                  Bold gradients, textures, and blend modes across backgrounds
                 </li>
               </ul>
             </div>
@@ -80,19 +84,23 @@ const HomePage: React.FC = () => {
               <ul className="space-y-3 text-text-secondary">
                 <li className="flex items-center">
                   <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
-                  Tables required for layout
+                  Tables required for layout (1–2 columns, ~600px wide)
                 </li>
                 <li className="flex items-center">
                   <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
-                  Web-safe fonts only
+                  Web-safe fonts only; decorative fonts won’t render consistently
                 </li>
                 <li className="flex items-center">
                   <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
-                  Inline styles mandatory
+                  No overlapping layers and using flat bg colors - No images
                 </li>
                 <li className="flex items-center">
                   <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
-                  Limited client support
+                  Live text separate from images for accessibility and clarity
+                </li>
+                <li className="flex items-center">
+                  <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
+                  Limited email client support (Outlook)
                 </li>
               </ul>
             </div>
@@ -104,9 +112,12 @@ const HomePage: React.FC = () => {
       <section className="py-16 bg-bg-primary">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-text-primary mb-4">Design with Email-Safe Grids</h2>
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
+              Design with Email-Safe Grids
+            </h2>
             <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-              Learn to structure your designs using table-based layouts that work across all email clients.
+              Learn to structure your designs using table-based layouts that work across all email
+              clients.
             </p>
           </div>
 
@@ -115,12 +126,13 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Design Restrictions Section */}
-      <section className="py-16 bg-bg-surface">
+      <section className="py-1 pt-0 bg-bg-surface">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-text-primary mb-4">What NOT to Design</h2>
+            <h2 className="text-3xl font-bold text-text-primary mb-4">What to avoid in Designs</h2>
             <p className="text-lg text-text-secondary max-w-3xl mx-auto">
-              Common design patterns that look amazing in mockups but can't be implemented in HTML emails.
+              Common design patterns that look amazing in mockups but can't be implemented in HTML
+              emails.
             </p>
           </div>
 
@@ -133,7 +145,8 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-text-primary mb-4">Ready to Learn More?</h2>
           <p className="text-lg text-text-secondary mb-8">
-            Explore more interactive examples covering images, mobile design, and client compatibility.
+            Explore more interactive examples covering images, mobile design, and client
+            compatibility.
           </p>
           <button className="bg-[var(--caribbean-current)] hover:brightness-90 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
             View All Examples

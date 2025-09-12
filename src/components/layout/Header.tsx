@@ -14,11 +14,13 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className={`fixed z-50 w-full max-w-6xl mx-4 app-header bg-white/90 backdrop-blur-md border border-border-default shadow-lg transition-all duration-300 ${
-      isScrolled 
-        ? 'top-0 left-1/2 transform -translate-x-1/2 rounded-none' 
-        : 'top-4 left-1/2 transform -translate-x-1/2 rounded-lg'
-    }`}>
+    <header
+      className={`fixed z-50 w-full max-w-6xl backdrop-blur-md border border-border-focus shadow-lg transition-all duration-300 ${
+        isScrolled
+          ? 'top-2 left-1/2 transform -translate-x-1/2 mx-0 rounded-lg bg-bg-code/80'
+          : 'top-4 left-1/2 transform -translate-x-1/2 mx-4 rounded-lg bg-bg-code'
+      }`}
+    >
       <div className="px-6 sm:px-8 lg:px-10">
         <div className="flex justify-between items-center py-3">
           <div className="flex items-center space-x-2">
