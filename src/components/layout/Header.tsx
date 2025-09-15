@@ -71,6 +71,9 @@ const Header: React.FC = () => {
                 <Link to="/guidelines" className="text-sm transition-colors hover:underline">
                   Guidelines
                 </Link>
+                {/* <Link to="/examples" className="text-sm transition-colors hover:underline">
+                  Examples
+                </Link> */}
               </>
             ) : (
               <>
@@ -80,6 +83,9 @@ const Header: React.FC = () => {
                 <Link to="/guidelines" className="text-sm transition-colors hover:underline">
                   Guidelines
                 </Link>
+                {/* <Link to="/examples" className="text-sm transition-colors hover:underline">
+                  Examples
+                </Link> */}
               </>
             )}
           </nav>
@@ -125,6 +131,13 @@ const Header: React.FC = () => {
                   >
                     Guidelines
                   </Link>
+                  {/* <Link
+                    to="/examples"
+                    className="block text-sm py-2 transition-colors hover:text-text-accent"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Examples
+                  </Link> */}
                 </>
               ) : (
                 <>
@@ -142,6 +155,13 @@ const Header: React.FC = () => {
                   >
                     Guidelines
                   </Link>
+                  {/* <Link
+                    to="/examples"
+                    className="block text-sm py-2 transition-colors hover:text-text-accent"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Examples
+                  </Link> */}
                 </>
               )}
             </nav>
