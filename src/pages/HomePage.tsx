@@ -63,26 +63,26 @@ const HomePage: React.FC = () => {
 
       <main className={`flex-1 ${isLoaded ? 'page-fade-in' : 'opacity-0'}`}>
         {/* Hero Section */}
-        <section className="bg-radial-brand text-white py-16 pt-50">
+        <section className="bg-radial-brand text-white py-12 md:py-16 pt-28 md:pt-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
               Why 60% of Email Designs
               <span className="block text-[var(--snow)]">Break in Outlook</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-[var(--snow)]/80">
               Learn the constraints. See the solutions. Build emails that work everywhere.
             </p>
-            <div className="flex justify-center space-x-4">
+            <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm sm:text-base">
               <div className="flex items-center space-x-2 text-[var(--snow)]">
-                <AlertTriangle className="h-6 w-6" />
+                <AlertTriangle className="h-5 w-5 shrink-0" />
                 <span>CSS Grid Breaks</span>
               </div>
               <div className="flex items-center space-x-2 text-[var(--snow)]">
-                <AlertTriangle className="h-6 w-6" />
+                <AlertTriangle className="h-5 w-5 shrink-0" />
                 <span>Flexbox Fails</span>
               </div>
               <div className="flex items-center space-x-2 text-[var(--snow)]">
-                <AlertTriangle className="h-6 w-6" />
+                <AlertTriangle className="h-5 w-5 shrink-0" />
                 <span>Fonts Fall Back</span>
               </div>
             </div>
@@ -90,7 +90,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Problem Section */}
-        <section id="problem-section" className="py-16 bg-bg-surface">
+        <section id="problem-section" className="py-12 md:py-16 bg-bg-surface">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-text-primary mb-4">
@@ -109,24 +109,24 @@ const HomePage: React.FC = () => {
                   <h3 className="text-xl font-semibold">Designer Vision</h3>
                 </div>
                 <ul className="space-y-3 text-text-secondary">
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2 mt-0.5 shrink-0" />
                     Rich, poster-style graphics with heavy artwork
                   </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2 mt-0.5 shrink-0" />
                     Custom typography & decorative fonts
                   </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2 mt-0.5 shrink-0" />
                     Overlapping elements, badges, and layered effects
                   </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2 mt-0.5 shrink-0" />
                     Text baked into images for exact styling
                   </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2" />
+                  <li className="flex items-start">
+                    <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2 mt-0.5 shrink-0" />
                     Bold gradients, textures, and blend modes across backgrounds
                   </li>
                 </ul>
@@ -138,24 +138,24 @@ const HomePage: React.FC = () => {
                   <h3 className="text-xl font-semibold">Email Reality</h3>
                 </div>
                 <ul className="space-y-3 text-text-secondary">
-                  <li className="flex items-center">
-                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
+                  <li className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2 mt-0.5 shrink-0" />
                     Tables required for layout (1–2 columns, ~600px wide)
                   </li>
-                  <li className="flex items-center">
-                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
+                  <li className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2 mt-0.5 shrink-0" />
                     Web-safe fonts only; decorative fonts won’t render consistently
                   </li>
-                  <li className="flex items-center">
-                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
+                  <li className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2 mt-0.5 shrink-0" />
                     No overlapping layers and using flat bg colors - No images
                   </li>
-                  <li className="flex items-center">
-                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
+                  <li className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2 mt-0.5 shrink-0" />
                     Live text separate from images for accessibility and clarity
                   </li>
-                  <li className="flex items-center">
-                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2" />
+                  <li className="flex items-start">
+                    <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2 mt-0.5 shrink-0" />
                     Limited email client support (Outlook)
                   </li>
                 </ul>
@@ -165,7 +165,7 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Grid Guide Section */}
-        <section id="grid-systems" className="py-16 bg-bg-primary">
+        <section id="grid-systems" className="py-12 md:py-16 bg-bg-primary">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold text-text-primary mb-4">

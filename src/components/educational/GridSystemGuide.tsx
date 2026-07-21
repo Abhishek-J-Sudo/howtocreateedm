@@ -68,7 +68,7 @@ const GridSystemGuide: React.FC = () => {
 
   return (
     <div className="card p-8 mb-8">
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
         <div>
           <div className="flex items-center mb-2">
             <Grid className="h-6 w-6 text-text-accent mr-2" />
@@ -82,7 +82,7 @@ const GridSystemGuide: React.FC = () => {
 
         <button
           onClick={() => setShowOverlays(!showOverlays)}
-          className="flex items-center space-x-2 btn btn-secondary text-sm"
+          className="flex items-center space-x-2 btn btn-secondary text-sm self-start sm:self-auto shrink-0"
         >
           {showOverlays ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           <span>{showOverlays ? 'Hide' : 'Show'} Grid</span>
