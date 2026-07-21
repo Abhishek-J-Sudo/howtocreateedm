@@ -54,3 +54,7 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+# Local build/export artifacts
+email-design.zip
+*.zip

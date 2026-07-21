@@ -96,6 +96,10 @@ const GridSystemGuide: React.FC = () => {
           Content-focused layout with image-text pairs for easy reading and engagement
         </p>
 
+        <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width email layout</p>
+        <div className="overflow-x-auto pb-2">
+          <div className="min-w-[600px]">
+
         {/* Newsletter Header */}
         <div className="mb-4">
           <div className="relative bg-white border-2 border-border-default rounded-t-lg p-6 overflow-hidden">
@@ -299,6 +303,8 @@ const GridSystemGuide: React.FC = () => {
             </div>
           </div>
         </div>
+          </div>
+        </div>
       </div>
 
       {/* E-commerce Mailer */}
@@ -307,6 +313,10 @@ const GridSystemGuide: React.FC = () => {
         <p className="text-text-secondary text-sm mb-6">
           Product-focused layout with three-column showcase and strong CTA
         </p>
+
+        <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width email layout</p>
+        <div className="overflow-x-auto pb-2">
+          <div className="min-w-[600px]">
 
         {/* E-commerce Header */}
         <div className="mb-4">
@@ -419,6 +429,8 @@ const GridSystemGuide: React.FC = () => {
             </div>
           </div>
         </div>
+          </div>
+        </div>
       </div>
 
       {/* Promotional Mailer */}
@@ -427,6 +439,10 @@ const GridSystemGuide: React.FC = () => {
         <p className="text-text-secondary text-sm mb-6">
           Single-column impact design with hero content and strong call-to-action
         </p>
+
+        <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width email layout</p>
+        <div className="overflow-x-auto pb-2">
+          <div className="min-w-[600px]">
 
         {/* Promotional Header */}
         <div className="mb-4">
@@ -564,6 +580,8 @@ const GridSystemGuide: React.FC = () => {
                 Unsubscribe
               </a>
             </div>
+          </div>
+        </div>
           </div>
         </div>
       </div>

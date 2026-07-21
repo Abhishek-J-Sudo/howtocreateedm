@@ -89,6 +89,9 @@ const DesignRestrictions: React.FC = () => {
           </div>
         </div>
 
+        <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width comparison</p>
+        <div className="overflow-x-auto pb-2">
+        <div className="min-w-[600px]">
         <div className="relative bg-white border-2 border-red-300 rounded-lg overflow-hidden mb-4">
           <div className="relative h-120 overflow-hidden">
             {/* Before (Problematic Design) */}
@@ -352,6 +355,8 @@ const DesignRestrictions: React.FC = () => {
             )}
           </div>
         </div>
+        </div>
+        </div>
 
         {/* Slider instruction */}
         <div className="text-center text-sm text-gray-600 mb-4">
@@ -382,6 +387,9 @@ const DesignRestrictions: React.FC = () => {
           </div>
         </div>
 
+        <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width comparison</p>
+        <div className="overflow-x-auto pb-2">
+        <div className="min-w-[600px]">
         <div className="relative bg-white border-2 border-red-300 rounded-lg overflow-hidden mb-4">
           <div className="relative h-64 overflow-hidden">
             {/* Before (Problematic Design) */}
@@ -517,6 +525,8 @@ const DesignRestrictions: React.FC = () => {
             )}
           </div>
         </div>
+        </div>
+        </div>
 
         {/* Slider instruction */}
         <div className="text-center text-sm text-gray-600 mb-4">
@@ -592,6 +602,9 @@ const DesignRestrictions: React.FC = () => {
           </div>
         </div>
 
+        <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width comparison</p>
+        <div className="overflow-x-auto pb-2">
+        <div className="min-w-[600px]">
         <div className="relative bg-white border-2 border-red-300 rounded-lg overflow-hidden mb-4">
           <div className="relative h-80 overflow-hidden">
             {/* Before (Problematic Design) */}
@@ -710,6 +723,8 @@ const DesignRestrictions: React.FC = () => {
               </div>
             )}
           </div>
+        </div>
+        </div>
         </div>
 
         {/* Slider instruction */}

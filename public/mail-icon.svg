@@ -1,4 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-  <polyline points="22,6 12,13 2,6"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#197278" />
+  <path
+    d="M17 22.5C17 20.567 18.567 19 20.5 19H43.5C45.433 19 47 20.567 47 22.5V41.5C47 43.433 45.433 45 43.5 45H20.5C18.567 45 17 43.433 17 41.5V22.5Z"
+    fill="#FFFAF7"
+  />
+  <path
+    d="M19.5 23.5L30.457 31.71C31.369 32.393 32.631 32.393 33.543 31.71L44.5 23.5"
+    stroke="#197278"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M19 42L28.492 32.982C29.441 32.081 30.93 31.991 31.979 32.775L32 32.791L32.021 32.775C33.07 31.991 34.559 32.081 35.508 32.982L45 42"
+    stroke="#197278"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
 </svg>
