@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Eye, EyeOff } from 'lucide-react';
+import { BadgeCheck, Ban, Check, Eye, EyeOff, Grid, Lightbulb, X } from 'lucide-react';
 
 // interface GridLayoutProps {
 //   title: string;
@@ -67,14 +67,15 @@ const GridSystemGuide: React.FC = () => {
   const [showOverlays, setShowOverlays] = useState(true);
 
   return (
-    <div className="card p-8 mb-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-        <div>
-          <div className="flex items-center mb-2">
-            <Grid className="h-6 w-6 text-text-accent mr-2" />
-            <h3 className="text-2xl font-bold text-text-primary">Email Grid System</h3>
+    <div className="grid-guide card mb-8">
+      <header className="grid-guide__header">
+        <div className="grid-guide__copy">
+          <span className="grid-guide__icon"><Grid aria-hidden="true" /></span>
+          <div>
+            <span className="grid-guide__eyebrow">Layout framework</span>
+            <h3>Email Grid System</h3>
           </div>
-          <p className="text-text-secondary">
+          <p>
             Think of your email design as a table with rows and columns. Here's how to structure
             common layouts.
           </p>
@@ -82,16 +83,16 @@ const GridSystemGuide: React.FC = () => {
 
         <button
           onClick={() => setShowOverlays(!showOverlays)}
-          className="flex items-center space-x-2 btn btn-secondary text-sm self-start sm:self-auto shrink-0"
+          className="grid-guide__toggle"
         >
           {showOverlays ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           <span>{showOverlays ? 'Hide' : 'Show'} Grid</span>
         </button>
-      </div>
+      </header>
 
       {/* Newsletter Mailer */}
-      <div className="mb-8">
-        <h4 className="font-semibold text-text-primary text-lg mb-2">1. Newsletter Mailer</h4>
+      <div className="grid-example">
+        <div className="grid-example__heading"><span>01</span><h4>Newsletter Mailer</h4></div>
         <p className="text-text-secondary text-sm mb-6">
           Content-focused layout with image-text pairs for easy reading and engagement
         </p>
@@ -308,8 +309,8 @@ const GridSystemGuide: React.FC = () => {
       </div>
 
       {/* E-commerce Mailer */}
-      <div className="mb-8">
-        <h4 className="font-semibold text-text-primary text-lg mb-2">2. E-commerce Mailer</h4>
+      <div className="grid-example">
+        <div className="grid-example__heading"><span>02</span><h4>E-commerce Mailer</h4></div>
         <p className="text-text-secondary text-sm mb-6">
           Product-focused layout with three-column showcase and strong CTA
         </p>
@@ -434,8 +435,8 @@ const GridSystemGuide: React.FC = () => {
       </div>
 
       {/* Promotional Mailer */}
-      <div className="mb-8">
-        <h4 className="font-semibold text-text-primary text-lg mb-2">3. Promotional Mailer</h4>
+      <div className="grid-example">
+        <div className="grid-example__heading"><span>03</span><h4>Promotional Mailer</h4></div>
         <p className="text-text-secondary text-sm mb-6">
           Single-column impact design with hero content and strong call-to-action
         </p>
@@ -587,39 +588,37 @@ const GridSystemGuide: React.FC = () => {
       </div>
 
       {/* Design Tips */}
-      <div className="bg-bg-elevated border border-border-subtle rounded-lg p-6 mt-8">
-        <h4 className="font-semibold text-text-primary mb-4 flex items-center">
-          <div className="w-2 h-2 bg-text-accent rounded-full mr-2"></div>
-          Designer Tips for Email Layouts
-        </h4>
-
-        <div className="grid md:grid-cols-2 gap-6">
+      <div className="design-tips mt-8">
+        <div className="design-tips__title">
+          <span className="design-tips__title-icon"><Lightbulb aria-hidden="true" /></span>
           <div>
-            <h5 className="font-medium text-text-primary mb-2">✅ Design Like This</h5>
-            <ul className="space-y-2 text-sm text-text-secondary">
-              <li>• Follow grid pattern while design and placing elements</li>
-              <li>• Keep designs wide and spacious (600px is emailer standard)</li>
-              <li>• Keep text over image limited to Key visuals only</li>
-              <li>• Make buttons and text extra large (16px+ fonts)</li>
-              <li>• Keep content copy separate — all key text as live text and not on images</li>
-            </ul>
+            <h4>Designer Tips for Email Layouts</h4>
+            <p>A quick checklist before handing your email design to development.</p>
           </div>
+        </div>
 
-          <div>
-            <h5 className="font-medium text-text-primary mb-2">❌ Avoid These Mistakes</h5>
-            <ul className="space-y-2 text-sm text-text-secondary">
-              <li>• Avoid overlapping elements — avoid layered text/badges over other content. </li>
-              <li>• Avoid text smaller than 14px</li>
-              <li>
-                • Avoid using gradients/blend effects behind text — keep flat, solid backgrounds
-                only
-              </li>
-              <li>
-                • Avoid complex multi-column layouts — avoid 3+ columns or dense side-by-side items.
-              </li>
-              <li>• Avoid diagonal design elements, strictly follow rectangle grids.</li>
+        <div className="design-tips__grid">
+          <section className="tip-list tip-list--do">
+            <h5><span><BadgeCheck aria-hidden="true" /></span>Design Like This</h5>
+            <ul>
+              <li><Check aria-hidden="true" /><span>Follow grid pattern while design and placing elements</span></li>
+              <li><Check aria-hidden="true" /><span>Keep designs wide and spacious (600px is emailer standard)</span></li>
+              <li><Check aria-hidden="true" /><span>Keep text over image limited to Key visuals only</span></li>
+              <li><Check aria-hidden="true" /><span>Make buttons and text extra large (16px+ fonts)</span></li>
+              <li><Check aria-hidden="true" /><span>Keep content copy separate — all key text as live text and not on images</span></li>
             </ul>
-          </div>
+          </section>
+
+          <section className="tip-list tip-list--avoid">
+            <h5><span><Ban aria-hidden="true" /></span>Avoid These Mistakes</h5>
+            <ul>
+              <li><X aria-hidden="true" /><span>Avoid overlapping elements — avoid layered text/badges over other content.</span></li>
+              <li><X aria-hidden="true" /><span>Avoid text smaller than 14px</span></li>
+              <li><X aria-hidden="true" /><span>Avoid using gradients/blend effects behind text — keep flat, solid backgrounds only</span></li>
+              <li><X aria-hidden="true" /><span>Avoid complex multi-column layouts — avoid 3+ columns or dense side-by-side items.</span></li>
+              <li><X aria-hidden="true" /><span>Avoid diagonal design elements, strictly follow rectangle grids.</span></li>
+            </ul>
+          </section>
         </div>
       </div>
     </div>

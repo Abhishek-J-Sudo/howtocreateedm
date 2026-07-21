@@ -4,8 +4,8 @@ import { Linkedin } from 'lucide-react';
 const Footer: React.FC = () => {
   return (
     <footer className="app-footer border-t border-border-default">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col items-center text-center gap-3">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-8 md:py-10">
+        <div className="flex flex-col items-start text-left md:items-center md:text-center gap-4">
           <div>
             <p>A visual guide to help designers understand email development constraints</p>
             <p className="text-sm opacity-80 mt-1">

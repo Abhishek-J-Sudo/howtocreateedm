@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative page-shell home-page">
       {/* Sticky Table of Contents */}
       <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
         <div className="bg-white rounded-lg shadow-lg border p-4 max-w-xs">
@@ -89,10 +89,20 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
+        <nav className="chapter-rail" aria-label="On this page">
+          <div className="chapter-rail__inner">
+            {tableOfContents.slice(0, 3).map(({ id, title, icon: Icon }, index) => (
+              <button key={id} onClick={() => scrollToSection(id)}>
+                <span>{String(index + 1).padStart(2, '0')}</span><Icon aria-hidden="true" />{title}
+              </button>
+            ))}
+          </div>
+        </nav>
+
         {/* Problem Section */}
         <section id="problem-section" className="py-12 md:py-16 bg-bg-surface">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="section-heading text-center mb-12">
               <h2 className="text-3xl font-bold text-text-primary mb-4">
                 The Designer-Developer Gap
               </h2>
@@ -102,13 +112,13 @@ const HomePage: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-bg-surface rounded-lg shadow-md p-6">
-                <div className="flex items-center mb-4">
+            <div className="perspective-grid grid md:grid-cols-2 gap-8">
+              <div className="perspective-card perspective-card--vision">
+                <div className="perspective-card__header">
                   <Monitor className="h-8 w-8 text-text-accent mr-3" />
                   <h3 className="text-xl font-semibold">Designer Vision</h3>
                 </div>
-                <ul className="space-y-3 text-text-secondary">
+                <ul className="perspective-list">
                   <li className="flex items-start">
                     <CheckCircle className="h-5 w-5 text-[var(--color-status-good)] mr-2 mt-0.5 shrink-0" />
                     Rich, poster-style graphics with heavy artwork
@@ -132,12 +142,12 @@ const HomePage: React.FC = () => {
                 </ul>
               </div>
 
-              <div className="bg-bg-surface rounded-lg shadow-md p-6">
-                <div className="flex items-center mb-4">
+              <div className="perspective-card perspective-card--reality">
+                <div className="perspective-card__header">
                   <Smartphone className="h-8 w-8 text-[var(--salmon)] mr-3" />
                   <h3 className="text-xl font-semibold">Email Reality</h3>
                 </div>
-                <ul className="space-y-3 text-text-secondary">
+                <ul className="perspective-list">
                   <li className="flex items-start">
                     <AlertTriangle className="h-5 w-5 text-[var(--salmon)] mr-2 mt-0.5 shrink-0" />
                     Tables required for layout (1–2 columns, ~600px wide)
@@ -167,7 +177,7 @@ const HomePage: React.FC = () => {
         {/* Grid Guide Section */}
         <section id="grid-systems" className="py-12 md:py-16 bg-bg-primary">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="section-heading text-center mb-12">
               <h2 className="text-3xl font-bold text-text-primary mb-4">
                 Design with Email-Safe Grids
               </h2>
@@ -182,9 +192,9 @@ const HomePage: React.FC = () => {
         </section>
 
         {/* Design Restrictions Section */}
-        <section id="restrictions" className="py-1 pt-0 bg-bg-surface">
+        <section id="restrictions" className="py-12 md:py-16 bg-bg-surface">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
+            <div className="section-heading text-center mb-12">
               <h2 className="text-3xl font-bold text-text-primary mb-4">
                 What to avoid in Designs
               </h2>

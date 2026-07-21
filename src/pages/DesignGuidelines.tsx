@@ -42,7 +42,7 @@ const DesignGuidelines: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative page-shell guidelines-page">
       {/* Sticky Table of Contents */}
       <div className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
         <div className="bg-white rounded-lg shadow-lg border p-4 max-w-xs">
@@ -74,6 +74,16 @@ const DesignGuidelines: React.FC = () => {
           </p>
         </div>
       </section>
+
+      <nav className="chapter-rail" aria-label="On this page">
+        <div className="chapter-rail__inner">
+          {tableOfContents.map(({ id, title, icon: Icon }, index) => (
+            <button key={id} onClick={() => scrollToSection(id)}>
+              <span>{String(index + 1).padStart(2, '0')}</span><Icon aria-hidden="true" />{title}
+            </button>
+          ))}
+        </div>
+      </nav>
 
       {/* Visual Hierarchy Section */}
       <section id="visual-hierarchy" className="py-16 bg-bg-surface">

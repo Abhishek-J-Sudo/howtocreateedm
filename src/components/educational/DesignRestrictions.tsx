@@ -1,7 +1,47 @@
 import React, { useState } from 'react';
-import { AlertTriangle, X, Eye, EyeOff, ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  AlertTriangle,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  EyeOff,
+  MailWarning,
+} from 'lucide-react';
+
+interface RestrictionIntroProps {
+  index: string;
+  title: string;
+  description: string;
+  reason: string;
+}
+
+const RestrictionIntro: React.FC<RestrictionIntroProps> = ({
+  index,
+  title,
+  description,
+  reason,
+}) => (
+  <div className="restriction-intro">
+    <div className="restriction-intro__summary">
+      <span className="restriction-intro__number">{index}</span>
+      <div className="restriction-intro__heading">
+        <h4>{title}</h4>
+      </div>
+      <p className="restriction-intro__description">{description}</p>
+    </div>
+    <div className="restriction-reason">
+      <div className="restriction-reason__heading">
+        <AlertTriangle aria-hidden="true" />
+        <strong>Why it breaks</strong>
+      </div>
+      <p>{reason}</p>
+    </div>
+  </div>
+);
 
 interface RestrictionExampleProps {
+  index: string;
   title: string;
   description: string;
   reason: string;
@@ -10,28 +50,17 @@ interface RestrictionExampleProps {
 }
 
 const RestrictionExample: React.FC<RestrictionExampleProps> = ({
+  index,
   title,
   description,
   reason,
   children,
 }) => {
   return (
-    <div className="mb-12">
-      <div className="mb-4">
-        <div className="flex items-center mb-2">
-          <X className="h-5 w-5 text-red-600 mr-2" />
-          <h4 className="font-semibold text-lg text-text-primary">{title}</h4>
-        </div>
-        <p className="text-text-secondary text-sm mb-2">{description}</p>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-          <div className="flex items-start">
-            <AlertTriangle className="h-4 w-4 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
-            <p className="text-red-800 text-sm">{reason}</p>
-          </div>
-        </div>
-      </div>
+    <div className="restriction-item">
+      <RestrictionIntro index={index} title={title} description={description} reason={reason} />
 
-      <div className="relative bg-white border-2 border-red-300 rounded-lg overflow-visible">
+      <div className="restriction-demo relative bg-white rounded-lg overflow-visible">
         {children}
       </div>
     </div>
@@ -45,14 +74,15 @@ const DesignRestrictions: React.FC = () => {
   const [textOverImageSliderPosition, setTextOverImageSliderPosition] = useState(100);
 
   return (
-    <div className="card p-8 mb-8">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-        <div>
-          <div className="flex items-center mb-2">
-            <AlertTriangle className="h-6 w-6 text-red-600 mr-2" />
-            <h3 className="text-2xl font-bold text-text-primary">Email Design Restrictions</h3>
+    <div className="restrictions-panel card mb-8">
+      <header className="restrictions-header">
+        <div className="restrictions-header__copy">
+          <span className="restrictions-header__icon"><MailWarning aria-hidden="true" /></span>
+          <div>
+            <span className="restrictions-header__eyebrow">Compatibility audit</span>
+            <h3>Email Design Restrictions</h3>
           </div>
-          <p className="text-text-secondary">
+          <p>
             Common design patterns that look great in mockups but can't be implemented in HTML
             emails.
           </p>
@@ -60,34 +90,21 @@ const DesignRestrictions: React.FC = () => {
 
         <button
           onClick={() => setShowOverlays(!showOverlays)}
-          className="flex items-center space-x-2 btn btn-secondary text-sm self-start sm:self-auto shrink-0"
+          className="restrictions-toggle"
         >
           {showOverlays ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
           <span>{showOverlays ? 'Hide' : 'Show'} Restrictions</span>
         </button>
-      </div>
+      </header>
 
       {/* Overlapping Elements with Before/After Slider */}
-      <div className="mb-12">
-        <div className="mb-4">
-          <div className="flex items-center mb-2">
-            <X className="h-5 w-5 text-red-600 mr-2" />
-            <h4 className="font-semibold text-lg text-text-primary">Overlapping Elements</h4>
-          </div>
-          <p className="text-text-secondary text-sm mb-2">
-            Images or text overlapping across different content sections or table rows.
-          </p>
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-            <div className="flex items-start">
-              <AlertTriangle className="h-4 w-4 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-sm">
-                Email clients don't support CSS z-index or absolute positioning. Elements must stay
-                within their grid cells. Overlapping elements will either need to be moved out or
-                moved in to fit into a grid section.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div className="restriction-item">
+        <RestrictionIntro
+          index="01"
+          title="Overlapping Elements"
+          description="Images or text overlapping across different content sections or table rows."
+          reason="Email clients don't support CSS z-index or absolute positioning. Elements must stay within their grid cells. Overlapping elements will either need to be moved out or moved in to fit into a grid section."
+        />
 
         <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width comparison</p>
         <div className="overflow-x-auto pb-2">
@@ -365,27 +382,13 @@ const DesignRestrictions: React.FC = () => {
       </div>
 
       {/* Diagonal Layouts with Before/After Slider */}
-      <div className="mb-12">
-        <div className="mb-4">
-          <div className="flex items-center mb-2">
-            <X className="h-5 w-5 text-red-600 mr-2" />
-            <h4 className="font-semibold text-lg text-text-primary">
-              Diagonal Text & Image Layouts
-            </h4>
-          </div>
-          <p className="text-text-secondary text-sm mb-2">
-            Text following diagonal lines or images positioned at angles across content sections.
-          </p>
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-            <div className="flex items-start">
-              <AlertTriangle className="h-4 w-4 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-sm">
-                HTML tables only support rectangular grid layouts. Diagonal arrangements require CSS
-                positioning that breaks in email clients.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div className="restriction-item">
+        <RestrictionIntro
+          index="02"
+          title="Diagonal Text & Image Layouts"
+          description="Text following diagonal lines or images positioned at angles across content sections."
+          reason="HTML tables only support rectangular grid layouts. Diagonal arrangements require CSS positioning that breaks in email clients."
+        />
 
         <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width comparison</p>
         <div className="overflow-x-auto pb-2">
@@ -536,6 +539,7 @@ const DesignRestrictions: React.FC = () => {
 
       {/* Complex Buttons and CTAs */}
       <RestrictionExample
+        index="03"
         title="Complex Button Designs & CTAs"
         description="Fancy buttons with gradients, custom shapes, or overlapping designs from PSD/Illustrator."
         reason="Fancy CTAs will be extracted as PNG images since the text links will get underlined in Outlook."
@@ -572,35 +576,13 @@ const DesignRestrictions: React.FC = () => {
       </RestrictionExample>
 
       {/* Text & CTA Overlaid on Images with Before/After Slider */}
-      <div className="mb-12">
-        <div className="mb-4">
-          <div className="flex items-center mb-2">
-            <X className="h-5 w-5 text-red-600 mr-2" />
-            <h4 className="font-semibold text-lg text-text-primary">
-              Text & CTA Overlaid on Images
-            </h4>
-          </div>
-          <p className="text-text-secondary text-sm mb-2">
-            Avoid white text positioned directly over images without proper fallbacks. CTAs over
-            images cant be linked individually, developers will need to extract full image and link
-            it as a whole.
-          </p>
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-            <div className="flex items-start">
-              <AlertTriangle className="h-4 w-4 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-sm">
-                If images are blocked (common in email), WHITE text becomes invisible. Email-safe
-                approach requires text in separate table cells. If CTAs are to be tracked and linked
-                individually, then add them separately along with copy keeping the image separate.
-              </p>
-              <p className="text-red-800 text-sm">
-                Note: Such section can be still added, but the whole section will be added as an
-                image and then devs will need to link the whole image, since link ctas over image is
-                not possible.
-              </p>
-            </div>
-          </div>
-        </div>
+      <div className="restriction-item">
+        <RestrictionIntro
+          index="04"
+          title="Text & CTA Overlaid on Images"
+          description="Avoid white text positioned directly over images without proper fallbacks. CTAs over images can't be linked individually, so developers must extract and link the full image."
+          reason="If images are blocked, white text becomes invisible. Keep copy and individually tracked CTAs in separate table cells, with the image treated as its own element."
+        />
 
         <p className="sm:hidden text-xs text-text-secondary mb-2">↔ Swipe to view the full-width comparison</p>
         <div className="overflow-x-auto pb-2">
@@ -734,46 +716,46 @@ const DesignRestrictions: React.FC = () => {
       </div>
 
       {/* Alternative Solutions */}
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6 mt-8">
-        <h4 className="font-semibold text-green-800 mb-4 flex items-center">
-          <div className="w-2 h-2 bg-green-600 rounded-full mr-2"></div>
-          Email-Safe Design Solutions
-        </h4>
+      <div className="safe-solutions">
+        <div className="safe-solutions__heading">
+          <span><Check aria-hidden="true" /></span>
+          <div><small>Recommended patterns</small><h4>Email-Safe Design Solutions</h4></div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <h5 className="font-medium text-green-800 mb-2">✅ Instead of Overlapping:</h5>
-            <ul className="space-y-1 text-sm text-green-700">
-              <li>• Use separate table rows/columns</li>
-              <li>• Place elements side-by-side</li>
-              <li>• Use background colors for emphasis</li>
+        <div className="safe-solutions__grid">
+          <div className="solution-group">
+            <h5>Instead of Overlapping</h5>
+            <ul>
+              <li><Check aria-hidden="true" /><span>Use separate table rows or columns</span></li>
+              <li><Check aria-hidden="true" /><span>Place elements side-by-side</span></li>
+              <li><Check aria-hidden="true" /><span>Use background colors for emphasis</span></li>
             </ul>
           </div>
 
-          <div>
-            <h5 className="font-medium text-green-800 mb-2">✅ Instead of Complex Buttons:</h5>
-            <ul className="space-y-1 text-sm text-green-700">
-              <li>• Simple rectangular buttons</li>
-              <li>• Solid colors or simple gradients</li>
-              <li>• Convert complex designs to images</li>
+          <div className="solution-group">
+            <h5>Instead of Complex Buttons</h5>
+            <ul>
+              <li><Check aria-hidden="true" /><span>Use simple rectangular buttons</span></li>
+              <li><Check aria-hidden="true" /><span>Use solid colors or simple gradients</span></li>
+              <li><Check aria-hidden="true" /><span>Convert complex designs to images</span></li>
             </ul>
           </div>
 
-          <div>
-            <h5 className="font-medium text-green-800 mb-2">✅ Instead of Text Over Images:</h5>
-            <ul className="space-y-1 text-sm text-green-700">
-              <li>• Text above or below images</li>
-              <li>• Use solid background colors</li>
-              <li>• Ensure text works without images</li>
+          <div className="solution-group">
+            <h5>Instead of Text Over Images</h5>
+            <ul>
+              <li><Check aria-hidden="true" /><span>Place text above or below images</span></li>
+              <li><Check aria-hidden="true" /><span>Use solid background colors</span></li>
+              <li><Check aria-hidden="true" /><span>Ensure text works without images</span></li>
             </ul>
           </div>
 
-          <div>
-            <h5 className="font-medium text-green-800 mb-2">✅ Instead of Videos:</h5>
-            <ul className="space-y-1 text-sm text-green-700">
-              <li>• Use Animated GIFs</li>
-              <li>• Keep first frame and last frame same as fallback</li>
-              <li>• Limit the gif sizes to under 1mb for better email loading</li>
+          <div className="solution-group">
+            <h5>Instead of Videos</h5>
+            <ul>
+              <li><Check aria-hidden="true" /><span>Use animated GIFs</span></li>
+              <li><Check aria-hidden="true" /><span>Keep the first and last frames consistent as a fallback</span></li>
+              <li><Check aria-hidden="true" /><span>Keep GIFs under 1MB for faster loading</span></li>
             </ul>
           </div>
         </div>
